@@ -1,0 +1,75 @@
+<template>
+    <div id="add-comment">
+     <h2>Add a new post
+         
+     </h2>
+     <form>
+         <label>Title </label>
+        <input type="text" v-model.lazy="blog.title" required/>
+        <label>Comment Content</label>
+        <textarea v-model.lazy="blog.content"></textarea>
+        <button v-on:click.prevent= "post">Add Comment</button>
+         </form>
+         <div id="preview">
+        <h3>Preview Comment</h3>
+        <p> Comment title: {{blog.title}}</p>
+        <p> Comment content: {{blog.content}}</p>
+        </div>
+    </div>
+    
+</template>
+
+<script>
+    export default {
+        data(){
+            return{
+                blog:
+                {title:"",
+                content:""
+                }
+                
+            }
+        },
+        methods: {
+        post: function(){
+            this.$http.post('http://jsonplaceholder.typicode.com/posts', {
+                title: this.blog.title,
+                body: this.blog.content,
+                userId: 1
+            }).then(function(data){
+                console.log(data);
+                this.submitted = true;
+            });
+        }
+    }
+}
+    
+</script>
+
+<style>
+#add-comment *{
+    box-sizing: border-box;
+}
+#add-comment{
+    margin: 20px auto;
+    max-width: 500px;
+}
+label{
+    display: block;
+    margin: 20px 0 10px;
+}
+input[type="text"], textarea{
+    display: block;
+    width: 100%;
+    padding: 8px;
+}
+#preview{
+    padding: 10px 20px;
+    border: 1px dotted #ccc;
+    margin: 30px 0;
+}
+h3{
+    margin-top: 10px;
+}
+
+</style>
