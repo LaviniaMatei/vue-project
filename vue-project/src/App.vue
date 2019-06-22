@@ -6,15 +6,18 @@
 </template>
 
 <script>
-import homeInput from './components/homeInput.vue'
-import addComment from './components/addComment.vue'
-import showComments from './components/showComments.vue'
+import addComment from'./components/addComment.vue'
+import showPosts from'./components/showPosts.vue'
+import login from'./components/login.vue'
+import signup from'./components/signup.vue'
+
 
 export default {
   components:{
-    'home-input': homeInput,
+    'log-in': login,
     'add-comment': addComment,
-    'show-comments': showComments
+     'sign-up': signup, 
+    'show-posts': showPosts
 
   },
 

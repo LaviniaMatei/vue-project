@@ -1,8 +1,31 @@
-import homeInput from'./components/homeInput.vue';
-import showComments from'./components/showComments.vue';
+import addComment from'./components/addComment.vue'
+import showPosts from'./components/showPosts.vue'
+import login from'./components/login.vue'
+import signup from'./components/signup.vue'
+
 
 
 export default[
-    {path:'/',component:homeInput},
-    {path:'/show',component:showComments}
-]
+    {
+        path: '/', 
+        component: showPosts, 
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path:'/login', 
+        component: login
+    },
+    {
+        path:'/signup', 
+        component: signup
+    },
+    {   
+        path:'/post/:id',
+        component:addComment, 
+        meta: {
+            requiresAuth: true
+        }
+    }
+];
