@@ -2,6 +2,7 @@ import addComment from'./components/addComment.vue'
 import showPosts from'./components/showPosts.vue'
 import login from'./components/login.vue'
 import signup from'./components/signup.vue'
+import profile from'./components/profile.vue'
 
 
 
@@ -21,6 +22,14 @@ export default[
         path:'/signup', 
         component: signup
     },
+{
+    path:'/profile', 
+    component: profile
+},
+{
+    path:'/addComment', 
+    component: addComment
+},
     {   
         path:'/post/:id',
         component:addComment, 

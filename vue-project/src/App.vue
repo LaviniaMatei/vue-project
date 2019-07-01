@@ -10,6 +10,7 @@ import addComment from'./components/addComment.vue'
 import showPosts from'./components/showPosts.vue'
 import login from'./components/login.vue'
 import signup from'./components/signup.vue'
+import profile from'./components/profile.vue'
 
 
 export default {
@@ -17,7 +18,8 @@ export default {
     'log-in': login,
     'add-comment': addComment,
      'sign-up': signup, 
-    'show-posts': showPosts
+    'show-posts': showPosts,
+    'profile-user': profile
 
   },
 

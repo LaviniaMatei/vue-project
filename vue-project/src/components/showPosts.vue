@@ -1,39 +1,47 @@
 <template>
     <div id="show-comments">
-        <h1>All Blog Articles</h1>
-        <div v-for="blog in blogs" class="single-blog">
-            <h2>{{ blog.title }}</h2>
-            <article>{{ blog.body }}</article>
-        </div>
-    </div>
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <img class="rounded mx-auto d-block img-fluid max-width: 100% height: auto" src="../assets/icon.png">
+    <h6 class="card-subtitle mb-2 text-muted">Home</h6>
+    <p class="card-text">Your personal Grupomania frontpage. Come here to be part of our growing community.</p>
+     <router-link to="/addComment"><button type="button" class="btn btn-primary btn-block">Create Post</button></router-link>
+   </div>
+  </div>
+
+    <h3>All blog comments</h3>
+</div>
+       
+    
 </template>
 
-<script>
-export default {
-    data () {
-        return {
-            blogs: []
-        }
+ <script>
+  import firebase from 'firebase';
+  export default {
+   
+    data() {
+      return { 
+          
+       
+      }
     },
-    methods: {
-    },
-    created() {
-        this.$http.get('http://jsonplaceholder.typicode.com/posts').then(function(data){
-            this.blogs = data.body.slice(0,10);
-        });
+    
+        
     }
-}
+    methods: {
+       
+  }
 </script>
-
 <style>
-#show-blogs{
-    max-width: 800px;
-    margin: 0px auto;
+.card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+        margin-top: 30px;
 }
-.single-blog{
-    padding: 20px;
-    margin: 20px 0;
-    box-sizing: border-box;
-    background: #eee;
+
+img{
+    width: 50%;
 }
+
 </style>

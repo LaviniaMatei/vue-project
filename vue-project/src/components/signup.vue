@@ -1,15 +1,14 @@
 <template>
-  <div class="sign-up">
+  <div class="sign-up" >
       <div class="wrapper">
    <div class ="form-signin">
-      <img class="rounded mx-auto d-block img-fluid max-width: 100% height: auto" src="../assets/icon.png">
-    <h3>Let's create a new account !</h3>
+     <div class = "img-icon"> <img class="rounded mx-auto img-fluid max-width: 100% height: auto" src="../assets/icon.png"></div>
+    <h1>Let's create a new account !</h1>
+    <input class ="form-control" type="text" v-model="name" placeholder="name"><br>
     <input class ="form-control" type="text" v-model="email" placeholder="Email"><br>
     <input class ="form-control" type="password" v-model="password" placeholder="Password"><br>
-    <div class="row justify-content-center">
-    <button @click="signUp" class="logbtn btn btn-primary btn-block">Sign Up</button>
-  </div>
-  <p>or go back to <router-link to="/login">login</router-link>.</p>
+    <button @click="signUp" class="btn btn-primary">SIGN UP</button>
+    <p>or go back to <router-link to="/login">LOG IN</router-link></p>
   </div>
   </div>
   </div>
@@ -17,40 +16,52 @@
 
  <script>
   import firebase from 'firebase';
+  
   export default {
     name: 'signUp',
     data() {
       return {
+        name: '',
         email: '',
         password: ''
       }
     },
     methods: {
       signUp: function() {
+        const db = firebase.firestore();
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
-          (user) => {
-            this.$router.replace('/')
+          (user) => { 
+              console.log(user.user.uid);
+                return db.collection("profiles").add({
+                    authId: user.user.uid,
+                    name: this.name,
+                    email: this.email
+                })
+                .then(() => {
+                    console.log("Document successfully written!");
+                    this.$router.replace('/');
+                })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                });
           },
           (err) => {
             alert('Oops. ' + err.message)
           }
         );
       }
+
     }
   }
 </script>
 
  <style scoped>
-  .signup{
+  .signup {
   
   margin: 0 auto;
-  place-items: center;
+  
   padding: 1rem;
-  color:#DB7093;
-}
-
-img{
-    width:50%;
+  
 }
 
 .wrapper {	
@@ -65,35 +76,34 @@ margin-bottom: 80px;
   
 }
 	
-.logbtn{
-   background-color: 	#C71585;   
-   border: none;
-  border-radius: 5rem;
-  color: white;
-  cursor: pointer;
-  font: 1.5em Raleway, sans-serif;
-  letter-spacing: .05em;
-  margin-top: 8px;
-  margin-bottom:8px;
-  height:4.2rem;
-  width: 15rem;
-  
+.btn{
+   
+  width: 10rem;
+  background-color: #0079D3;
+ 
       
     }
 p{
-  padding-top: 10px;
-  color: #DB7093;
+  padding-top: 20px;
+  font-size: 12px;
+ 
 }
 
 .routlink{
     color: #DB7093;
 }
-h3{
-  margin-bottom:16px;
-   color: #DB7093;
-  
+h1{
+  margin-bottom:18px;
+  margin-top:8px;
+  font-size: 18px;
   
 }
+img{
+  width:20%;
+}
 
+.img-icon{
+margin-left: -8px;
+}
 
 </style>
