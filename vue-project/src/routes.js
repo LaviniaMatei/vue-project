@@ -3,6 +3,7 @@ import showPosts from'./components/showPosts.vue'
 import login from'./components/login.vue'
 import signup from'./components/signup.vue'
 import profile from'./components/profile.vue'
+import navbar from'./components/navbar.vue'
 
 
 
@@ -29,6 +30,11 @@ export default[
 {
     path:'/addComment', 
     component: addComment
+},
+
+{
+    path:'/navbar', 
+    component: navbar
 },
     {   
         path:'/post/:id',

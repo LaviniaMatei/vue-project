@@ -1,8 +1,10 @@
 <template>
-  <div class="profile">
-     <div class="card bg-light ml-5" style="max-width: 18rem;">
+  <div class="profile mt-5 mb-5">
+       <div class="row d-flex justify-content-center">
+     <div class="card col-md-6" style="max-width: 18rem;">
             <div class="card-body">
-                        <h2>Your profile</h2>
+                 <div class = "img-icon"> <img class="rounded mx-auto img-fluid max-width: 100% height: auto" src="../assets/icon.png"></div>
+                        <h3>Your profile</h3>
                        <div class="form-group">
                           
                           <div class="col-xs-6">
@@ -29,15 +31,16 @@
                        <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button @click="updateProfile" class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                              	<button @click="updateProfile" class="waves-effect waves-light btn light blue" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
                                	
                             </div>
                       </div>
                       <p>Not happy with us?</p>
-                      <button @click="deleteUser" class="logbtn btn btn-primary btn-block">Delete your account</button>
+                      <button @click="deleteUser" class="waves-effect waves-light btn light blue">Delete your account</button>
+            </div>
             </div>
         </div>
-        <hr>
+        
         
     </div>
   
@@ -101,15 +104,26 @@
   }
 </script>
 <style>
-#show-blogs{
-    max-width: 800px;
-    margin: 0px auto;
+.profile {
+  margin: 0 auto;
+  padding: 1rem;
+  
+  
 }
-.single-blog{
-    padding: 20px;
-    margin: 20px 0;
-    box-sizing: border-box;
-    background: #eee;
-    
+
+img{
+  width:28%;
 }
+
+.img-icon{
+margin-left: -15px;
+}
+.btn{
+    color:white;
+}
+h3{
+    font-size: 1.50rem;
+}
+
+
 </style>
