@@ -3,13 +3,13 @@
        <div class="row d-flex justify-content-center">
      <div class="card col-md-6" style="max-width: 18rem;">
             <div class="card-body">
-                 <div class = "img-icon"> <img class="rounded mx-auto img-fluid max-width: 100% height: auto" src="../assets/icon.png"></div>
+                 <div class="img-prof"> <img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
                         <h3>Your profile</h3>
                        <div class="form-group">
                           
                           <div class="col-xs-6">
                               <label for="name"><p>Name</p></label>
-                              <input type="text" class="form-control" v-model="profile.name" placeholder="name" title="enter your first name if any.">
+                              <input type="text" class="form-control" v-model="profile.name">
                           </div>
                       </div>
 
@@ -17,7 +17,7 @@
                           
                           <div class="col-xs-6">
                             <label for="job"><p>Job</p></label>
-                              <input type="text" class="form-control" v-model="profile.job" placeholder="job" title="enter your last name if any.">
+                              <input type="text" class="form-control" v-model="profile.job">
                           </div>
 
                       </div>
@@ -85,25 +85,28 @@
                 job: this.profile.job,
                 skills: this.profile.skills
             });
+            alert("Your profile has been saved successfully!");
         },
 
       deleteUser: function() {
         const user = firebase.auth().currentUser;
 
-  user.delete().then(function() {
+  Promise.all(user.delete(), firebase.firestore().doc('profiles/' + this.profile.uid).delete()).then(function() {
+      alert('user deleted');
     // User deleted.
-     alert('User deleted')
+     
   }).catch(function(error) {
     // An error happened.
     console.log("User NOT deleted")
   });
-
       }
 
     }
   }
+
 </script>
-<style>
+
+<style scoped>
 .profile {
   margin: 0 auto;
   padding: 1rem;
@@ -111,12 +114,14 @@
   
 }
 
-img{
-  width:28%;
+.img-prof img{
+  width:20%;
+  margin-left: -8px;
 }
 
-.img-icon{
-margin-left: -15px;
+.img-prof{
+ 
+  margin-left: -8px;
 }
 .btn{
     color:white;

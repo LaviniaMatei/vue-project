@@ -2,13 +2,15 @@
   <div class="sign-up" >
       <div class="wrapper">
    <div class ="form-signin">
-     <div class = "img-icon"> <img class="rounded mx-auto img-fluid max-width: 100% height: auto" src="../assets/icon.png"></div>
+     <div class="img-log "> <img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
     <h1>Let's create a new account !</h1>
-    <input class ="form-control" type="text" v-model="name" placeholder="name"><br>
+    <form class="form-group needs-validation" @submit="signUp($event)">
+    <input class ="form-control" type="text" v-model="name" placeholder="name" required="true"><br>
     <input class ="form-control" type="text" v-model="email" placeholder="Email"><br>
     <input class ="form-control" type="password" v-model="password" placeholder="Password"><br>
-    <button @click="signUp" class="btn btn-primary">SIGN UP</button>
+    <button class="btn btn-primary">SIGN UP</button>
     <p>or go back to <router-link to="/login">LOG IN</router-link></p>
+  </form>
   </div>
   </div>
   </div>
@@ -27,7 +29,8 @@
       }
     },
     methods: {
-      signUp: function() {
+      signUp: function(e) {
+        e.preventDefault();
         const db = firebase.firestore();
         firebase.auth().createUserWithEmailAndPassword(this.email, this.password).then(
           (user) => { 
@@ -38,7 +41,7 @@
                     email: this.email
                 })
                 .then(() => {
-                    console.log("Document successfully written!");
+                    alert("Account created successfully!");
                     this.$router.replace('/');
                 })
                 .catch(function(error) {
@@ -98,12 +101,15 @@ h1{
   font-size: 18px;
   
 }
-img{
-  width:20%;
+.img-log img{
+  width:15%;
+  margin-left: -8px;
 }
 
-.img-icon{
-margin-left: -8px;
+.img-log{
+ 
+  margin-left: -8px;
 }
+
 
 </style>

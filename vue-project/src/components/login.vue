@@ -2,7 +2,7 @@
   <div class="login">
   <div class="wrapper">
   <div class ="form-signin">
-      <div class = "img-icon"><img class="rounded mx-auto img-fluid max-width: 100% height: auto" src="../assets/icon.png"></div>
+      <div class = "img-sign"><img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
        <h1>Sign In</h1>
     <input class ="form-control" type="text" v-model="email" placeholder="Email"><br>
     <input class ="form-control" type="password" v-model="password" placeholder="Password"><br>
@@ -88,13 +88,18 @@ h1{
   font-size: 18px;
   
 }
-img{
-  width:20%;
- 
+
+
+
+
+.img-sign img{
+  max-width:15%;
+  margin-left: -8px;
 }
 
-.img-icon{
-margin-left: -8px;
+.img-sign{
+ 
+  margin-left: -8px;
 }
 
 

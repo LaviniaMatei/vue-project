@@ -2,17 +2,15 @@
 <div class="navBar" >
    <template>
   <nav class="nav-wrapper light blue">
-    <div class = "brand-logo left"><img alt="" src="../assets/icon-left-font-monochrome-black.svg"></div>
-        <ul class ="right">
+    <div class = "brand-logo left rounded mx-auto img-fluid"><img class="rounded mx-auto img-fluid" alt="" src="../assets/icon.png"></div>
+        <ul class ="right ">
     <li v-if="isLoggedIn"><span class="email black-text">{{currentUser}}</span></li>
     <li v-if="isLoggedIn"><router-link to="/">Dashboard</router-link></li>
      <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
     <li v-if="!isLoggedIn"><router-link to="/signup">Register</router-link></li>
-    <li><router-link to="/profile">Profile</router-link> </li>
-    <li v-if="isLoggedIn"><button v-on:click="logout" class="btn white">Logout</button></li>
+    <li v-if="isLoggedIn"><router-link to="/profile">Profile</router-link> </li>
+    <li v-if="isLoggedIn"><button v-on:click="logout" class="btn">Logout</button></li>
     </ul>   
-        
-     
     </nav>
   </template>
     </div>
@@ -31,10 +29,15 @@ export default {
     };
   },
   created() {
-    if (firebase.auth().currentUser) {
-      this.isLoggedIn = true;
-      this.currentUser = firebase.auth().currentUser.email;
-    }
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            this.isLoggedIn = true;
+            this.currentUser = user.email;
+        } else {
+            this.isLoggedIn = false;
+            this.currentUser = null;
+        }
+    });
   },
   methods: {
     logout: function() {
@@ -42,7 +45,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.go({ path: this.$router.path });
+          this.$router.replace('/');
         });
     }
   }
@@ -50,14 +53,30 @@ export default {
 </script>
 
 <style>
-img{
-  width:120px;
-  padding-left: 10px;
+.brand-logo{
+  width:50px;
+  margin-left: 30px;
   margin-bottom: 5px;
+}
+
+.brand-logo img {
+  width:80%;
+  margin-left: 30px;
 }
 
 .right{
     padding-right:10px;
 }
+.btn{
+    color:darkgreen;
+    
+}
+
+.nav-wrapper{
+    padding-left: 10px;
+}
+
+
+
  
 </style>

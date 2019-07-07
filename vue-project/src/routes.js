@@ -31,11 +31,6 @@ export default[
     path:'/addComment', 
     component: addComment
 },
-
-{
-    path:'/navbar', 
-    component: navbar
-},
     {   
         path:'/post/:id',
         component:addComment, 
