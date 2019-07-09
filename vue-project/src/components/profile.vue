@@ -31,12 +31,12 @@
                        <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
-                              	<button @click="updateProfile" class="waves-effect waves-light btn light blue" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                              	<button @click="updateProfile" class="btn btn-primary btn-profile" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
                                	
                             </div>
                       </div>
                       <p>Not happy with us?</p>
-                      <button @click="deleteUser" class="waves-effect waves-light btn light blue">Delete your account</button>
+                      <button @click="deleteUser" class="btn btn-primary btn-profile">Delete your account</button>
             </div>
             </div>
         </div>
@@ -130,5 +130,7 @@ h3{
     font-size: 1.50rem;
 }
 
-
+.btn-profile{
+  margin-left: -1px;
+}
 </style>

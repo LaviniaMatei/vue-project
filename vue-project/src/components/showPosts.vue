@@ -9,7 +9,7 @@
     <div class="form-group">
     <textarea v-model="body" placeholder="Enter your comment" class="box" ></textarea>
     </div>
-    <button @click="addComment(title, body)" type="button" class="btn btn-primary mt-3" >Post </button>
+    <button @click="addComment(title, body)" type="button" class="btn btn-primary mt-3 btn-post" >Post </button>
 </form>
 </div>
 
@@ -123,17 +123,17 @@ border-radius: 10px;
 
 #add-comment{
    background-color: #efe8e8;
-     margin: 0 auto;
-     padding: 1rem;
+   margin: 0 auto;
+   padding: 1rem;
 
 }
 
 h2{
 font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-    color: rgb(28, 28, 28);
-    margin-bottom:15px;
+font-weight: 500;
+line-height: 22px;
+color: rgb(28, 28, 28);
+margin-bottom:15px;
     
 }
 
@@ -169,7 +169,10 @@ border-radius: 10px;
 }
 
 .unread {
-  background-color: red;
+  background-color:#e1e8f0;
 }
-
+.btn-post{
+  margin-left:-1px;
+  color:white;
+}
 </style>

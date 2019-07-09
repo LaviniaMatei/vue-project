@@ -1,18 +1,30 @@
 <template>
-<div class="navBar" >
-   <template>
-  <nav class="nav-wrapper light blue">
-    <div class = "brand-logo left rounded mx-auto img-fluid"><img class="rounded mx-auto img-fluid" alt="" src="../assets/icon.png"></div>
-        <ul class ="right ">
-    <li v-if="isLoggedIn"><span class="email black-text">{{currentUser}}</span></li>
-    <li v-if="isLoggedIn"><router-link to="/">Dashboard</router-link></li>
-     <li v-if="!isLoggedIn"><router-link to="/login">Login</router-link></li>
-    <li v-if="!isLoggedIn"><router-link to="/signup">Register</router-link></li>
-    <li v-if="isLoggedIn"><router-link to="/profile">Profile</router-link> </li>
-    <li v-if="isLoggedIn"><button v-on:click="logout" class="btn">Logout</button></li>
-    </ul>   
-    </nav>
-  </template>
+<div class="navBar " >
+    <container ml-5>
+   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class = "brand-logo rounded mx-auto img-fluid"><img class="rounded mx-auto img-fluid" alt="" src="../assets/icon-left-font-monochrome-black.svg"></div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+   
+  <div class="collapse navbar-collapse mr-3px" id="navbarTogglerDemo02">
+       <ul class="navbar-nav navbar-dark bg-primary mr-auto mt-2 mt-lg-0 ">
+      
+      <li class="nav-item" v-if="isLoggedIn"><span class="nav-link">{{currentUser}}</span>
+      </li>
+      <li class="nav-item"
+        v-if="isLoggedIn"><a class="nav-link" href="/">Dashboard</a>
+      </li>
+      <li class="nav-item" v-if="!isLoggedIn"><a class="nav-link" href="/login">Login</a></li>
+    <li class="nav-item" v-if="!isLoggedIn"><a class="nav-link" href="/signup">Sign up</a></li>
+    <li class="nav-item" v-if="isLoggedIn"><a class="nav-link" href="/profile">Profile</a> </li>
+    <li class="nav-item" v-if="isLoggedIn"><button v-on:click="logout" class="btn">Logout</button></li>
+     
+    </ul>
+    
+  </div>
+</nav>
+  </container>
     </div>
   </template>
 
@@ -54,22 +66,24 @@ export default {
 
 <style>
 .brand-logo{
-  width:50px;
-  margin-left: 30px;
-  margin-bottom: 5px;
+  width:200px;
+  
+  
 }
 
 .brand-logo img {
   width:80%;
-  margin-left: 30px;
+  
 }
 
 .right{
     padding-right:10px;
 }
 .btn{
-    color:darkgreen;
     
+    margin-left: -10px;
+    color:black;
+    padding-top: 7px;
 }
 
 .nav-wrapper{
