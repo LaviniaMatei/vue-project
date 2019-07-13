@@ -17,7 +17,7 @@
   <article class="form-group preview" @click="markCommentRead(comment)"
         v-bind:class="{ unread: !comment.currentUserHasReadTheComment }" 
         v-for="(comment, idx) in comments" :key="idx">
-   <h4>{{ comment.title }}</h4>
+   <h4>{{ comment.title }} - author: {{comment.userName}}</h4>
    <p>{{ comment.body }}</p>
   </article>
 </div>
@@ -101,7 +101,9 @@ import firebase from 'firebase';
           title, 
           body, 
           createdAt,
-          userIdsReadComment
+          userIdsReadComment,
+          userId: this.profile.uid,
+          userName: this.profile.name
         }
       ).then(() => this.reloadComments())
     }

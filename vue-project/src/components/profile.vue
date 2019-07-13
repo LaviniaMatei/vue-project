@@ -25,18 +25,29 @@
                           
                           <div class="col-xs-6">
                               <label for="skills"><p>Skills</p></label>
-                              <input type="skills" class="form-control" v-model="profile.skills" title="enter your skills.">
+                              <input type="text" class="form-control" id="skills" autocomplete="off" v-model="profile.skills" title="enter your skills.">
                           </div>
                       </div>
                        <div class="form-group">
                            <div class="col-xs-12">
                                 <br>
                               	<button @click="updateProfile" class="btn btn-primary btn-profile" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
-                               	
+                              
                             </div>
                       </div>
                       <p>Not happy with us?</p>
-                      <button @click="deleteUser" class="btn btn-primary btn-profile">Delete your account</button>
+                      <button @click="askDeleteUser" class="btn btn-primary btn-profile">Delete your account</button>
+
+                      <div v-if="showConfirmDelete">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <input style="opacity: 0;position: absolute; width: 0;">
+                                <label for="password"><p>Password</p></label>
+                                <input type="password" id="password" class="form-control" v-model="password" title="Enter the Password">
+                            </div>
+                        </div>
+                        <button @click="deleteUser" class="btn btn-danger btn-profile">Confirm</button>
+                      </div>
             </div>
             </div>
         </div>
@@ -61,8 +72,9 @@
               email: null,
               uid :null,
               skills: null
-          }
-       
+          },
+          password: '',
+          showConfirmDelete: false
       }
     },
     mounted() {
@@ -79,28 +91,55 @@
 
     },
     methods: {
-        updateProfile(){
-            firebase.firestore().doc('profiles/' + this.profile.uid).update({
-                name : this.profile.name,
-                job: this.profile.job,
-                skills: this.profile.skills
-            });
-            alert("Your profile has been saved successfully!");
-        },
-
-      deleteUser: function() {
+      askDeleteUser() {
+        this.showConfirmDelete = true;
+      },
+      updateProfile(){
+          firebase.firestore().doc('profiles/' + this.profile.uid).update({
+              name : this.profile.name,
+              job: this.profile.job,
+              skills: this.profile.skills
+          });
+          alert("Your profile has been saved successfully!");
+      },
+      reauthenticate() {
         const user = firebase.auth().currentUser;
+        const cred = firebase.auth.EmailAuthProvider.credential(
+              user.email, this.password);
+        return user.reauthenticateWithCredential(cred);
+      },
+      deleteUser: function() {
+        this.reauthenticate().then(() => {
+          const user = firebase.auth().currentUser;
 
-  Promise.all(user.delete(), firebase.firestore().doc('profiles/' + this.profile.uid).delete()).then(function() {
-      alert('user deleted');
-    // User deleted.
-     
-  }).catch(function(error) {
-    // An error happened.
-    console.log("User NOT deleted")
-  });
+          const db = firebase.firestore();
+          Promise.all([
+            user.delete(), // we delete the user from the authentication
+            db.doc('profiles/' + this.profile.uid).delete(), // we delete the user from the firestore database
+            db.collection('comments') //we take the comments collection
+              .where('userId', '==', this.profile.uid) // we filter it by the userId
+              .get() // retrieve the collection to perform update on it
+              .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    var commentRef = db.collection('comments').doc(doc.id);
+
+                    return commentRef.update({
+                        userName: '[deleted]'
+                    });
+                });
+              })// we update the userName field to be '[deleted]
+          ])
+          .then(() => {
+              alert('user deleted');
+              this.$router.replace('/login');
+            // User deleted.
+            
+          }).catch(function(error) {
+            // An error happened.
+            console.log("User NOT deleted")
+          });
+        });
       }
-
     }
   }
 
