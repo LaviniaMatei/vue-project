@@ -2,7 +2,7 @@
   <div class="login">
   <div class="wrapper">
   <div class ="form-signin">
-      <div class = "img-sign"><img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
+      <div class = "img-sign"><img class="rounded mx-auto img-fluid" src="../assets/icon.png" alt="Grupomania Logo"></div>
        <h1>Sign In</h1>
     <input class ="form-control" type="text" v-model="email" placeholder="Email"><br>
     <input class ="form-control" type="password" v-model="password" placeholder="Password"><br>

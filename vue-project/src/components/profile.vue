@@ -3,7 +3,7 @@
        <div class="row d-flex justify-content-center">
      <div class="card col-md-6" style="max-width: 18rem;">
             <div class="card-body">
-                 <div class="img-prof"> <img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
+                 <div class="img-prof"> <img class="rounded mx-auto img-fluid" src="../assets/icon.png" alt="Grupomania Logo"></div>
                         <h3>Your profile</h3>
                        <div class="form-group">
                           

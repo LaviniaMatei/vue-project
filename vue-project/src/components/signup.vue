@@ -2,12 +2,12 @@
   <div class="sign-up" >
       <div class="wrapper">
    <div class ="form-signin">
-     <div class="img-log "> <img class="rounded mx-auto img-fluid" src="../assets/icon.png"></div>
+     <div class="img-log "> <img class="rounded mx-auto img-fluid" src="../assets/icon.png" alt="Grupomania Logo"></div>
     <h1>Let's create a new account !</h1>
     <form class="form-group needs-validation" @submit="signUp($event)">
-    <input class ="form-control" type="text" v-model="name" placeholder="name" required="true"><br>
-    <input class ="form-control" type="text" v-model="email" placeholder="Email"><br>
-    <input class ="form-control" type="password" v-model="password" placeholder="Password"><br>
+    <input class ="form-control" type="text" v-model="name" id="name" placeholder="name" required="true"><br>
+    <input class ="form-control" type="text" v-model="email" id="email" placeholder="Email"><br>
+    <input class ="form-control" type="password" v-model="password" id="password" placeholder="Password"><br>
     <button class="btn btn-primary">SIGN UP</button>
     <p>or go back to <router-link to="/login">LOG IN</router-link></p>
   </form>

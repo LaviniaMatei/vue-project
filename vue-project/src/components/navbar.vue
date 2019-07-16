@@ -2,7 +2,7 @@
 <div class="navBar " >
     <container ml-5>
    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <div class = "brand-logo rounded mx-auto img-fluid"><img class="rounded mx-auto img-fluid" alt="" src="../assets/icon-left-font-monochrome-black.svg"></div>
+      <div class = "brand-logo rounded mx-auto img-fluid"><img class="rounded mx-auto img-fluid" alt="Grupomania Logo" src="../assets/icon-left-font-monochrome-black.svg"></div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
