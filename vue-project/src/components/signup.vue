@@ -84,6 +84,7 @@ margin-bottom: 80px;
   width: 10rem;
   background-color: #0079D3;
   margin-left: -1px;
+  color:white;
  
       
     }

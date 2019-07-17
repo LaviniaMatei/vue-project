@@ -1,7 +1,9 @@
 <template>
+
   <div class="profile mt-5 mb-5">
+    
        <div class="row d-flex justify-content-center">
-     <div class="card col-md-6" style="max-width: 18rem;">
+     <div class="card col-md-3" style="max-width: 18rem;">
             <div class="card-body">
                  <div class="img-prof"> <img class="rounded mx-auto img-fluid" src="../assets/icon.png" alt="Grupomania Logo"></div>
                         <h3>Your profile</h3>
@@ -54,7 +56,7 @@
         
         
     </div>
-  
+ 
 </template>
 
 <script>
@@ -79,12 +81,13 @@
     },
     mounted() {
         console.log(firebase.auth().currentUser);
-       firebase.firestore().collection('profiles')
-                .where('authId', '==', firebase.auth().currentUser.uid).get().then((profiles) => {
-                    const profile = profiles.docs[0];
+       firebase.firestore().collection('profiles') //retrieve the profiles collection
+                .where('authId', '==', firebase.auth().currentUser.uid) //filter the profiles to get the profile of the current authenticated user
+                .get().then((profiles) => {//we put it into the component data
+                    const profile = profiles.docs[0]; //we take the first and the only one, just because there will never be more than one with the same authId
                     this.profile = {
-                        uid: profile.id,
-                        ...profile.data()
+                        uid: profile.id, // getting the id of the document
+                        ...profile.data() // getting all the data that the document contains, and spreading them
                     };
                     console.log(this.profile);
                 });
@@ -109,7 +112,7 @@
         return user.reauthenticateWithCredential(cred);
       },
       deleteUser: function() {
-        this.reauthenticate().then(() => {
+        this.reauthenticate().then(() => {// once it is reauthenticated we delete user
           const user = firebase.auth().currentUser;
 
           const db = firebase.firestore();
@@ -149,6 +152,7 @@
 .profile {
   margin: 0 auto;
   padding: 1rem;
+  
   
   
 }

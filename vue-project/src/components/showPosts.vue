@@ -64,13 +64,13 @@ import firebase from 'firebase';
       const db = firebase.firestore();
 
       const userIdsReadComment = {
-        ...comment.userIdsReadComment
+        ...comment.userIdsReadComment // we take the current userIdsReadComment object values
       };
-      userIdsReadComment[this.profile.uid] = true;
+      userIdsReadComment[this.profile.uid] = true; // and we add the id of the current user to show that this user has read this comment
       db.doc('comments/' + comment.id).update({
-        userIdsReadComment
+        userIdsReadComment // we update the userIdsReadComment object to put there the info, that the user has read the comment
       });
-      comment.currentUserHasReadTheComment = true;
+      comment.currentUserHasReadTheComment = true; // we put this field to true, just because it's more convenient to use in the vue template
     },
     reloadComments() {
       const db = firebase.firestore();
@@ -82,7 +82,7 @@ import firebase from 'firebase';
                                 const comment =  {
                                     id: doc.id,
                                     ...commentData,
-                                    currentUserHasReadTheComment: commentData.userIdsReadComment && commentData.userIdsReadComment[this.profile.uid]
+                                    currentUserHasReadTheComment: commentData.userIdsReadComment && commentData.userIdsReadComment[this.profile.uid] // we check if the current user has marked the comment as 'read'. in other words, we try to get the userid == in currentUserHasReadTheComment object
                                 };
 
                                 return comment;
@@ -94,7 +94,7 @@ import firebase from 'firebase';
       const db = firebase.firestore();
       const createdAt = new Date();
       const userIdsReadComment = {};
-      userIdsReadComment[this.profile.uid] = true;
+      userIdsReadComment[this.profile.uid] = true; // we just mark the  comment that the current user has read it, because he/she created it
 
       db.collection('comments').add(
         { 
@@ -105,7 +105,11 @@ import firebase from 'firebase';
           userId: this.profile.uid,
           userName: this.profile.name
         }
-      ).then(() => this.reloadComments())
+      ).then(() => {
+        this.title = '';
+        this.body ='';
+        this.reloadComments()
+      })
     }
   }
 }
